@@ -21,37 +21,43 @@ searchButton.addEventListener('click',onClick)
 
 function onClick(evt) {
     evt.preventDefault()
+    loadMoreButton.style.display = 'none'
     cleanImages()
     const trimmedValue = input.value.trim();
     if (trimmedValue !== '') {
         createFetch(trimmedValue, pageNr).then(data => {
             
             if (data.hits.length === 0) {
-                 Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
+                Notiflix.Notify.failure(
+                    'Sorry, there are no images matching your search query. Please try again.'
+                );
+              
             }
             else {
+                Notiflix.Notify.success(
+                    `Hooray! We found ${data.totalHits} images.`
+                );
                 createMarckup(data.hits);
-                  Notiflix.Notify.success(
-          `Hooray! We found ${data.totalHits} images.`
-                  );
-                
-    loadMoreButton.style.display= 'block'
                 gallerySimpleLightbox.refresh()
+                loadMoreButton.style.display = 'block'
             }
+            
         })
+        
     }
+    
 }
 
 loadMoreButton.addEventListener('click',onLoadMoreClick)
 function onLoadMoreClick(evt) {
     evt.preventDefault;
     pageNr += 1
+loadMoreButton.style.display = 'none'
+
      const trimmedValue = input.value.trim();
     if (trimmedValue !== '') {
         createFetch(trimmedValue, pageNr).then(data => {
-            
+          
             if (data.hits.length === 0) {
                  Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -59,10 +65,8 @@ function onLoadMoreClick(evt) {
                 
             }
             else {
-                createMarckup(data.hits);
-                  Notiflix.Notify.success(
-          `Hooray! We found ${data.totalHits} images.`
-                  );
+                createMarckup(data.hits)
+                loadMoreButton.style.display = 'block'
                 gallerySimpleLightbox.refresh()
             }
         })

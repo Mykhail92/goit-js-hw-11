@@ -17,10 +17,12 @@
 .search-btn{
     margin-left: 5px;
     cursor: pointer;
+    border: none;
+    transition: all 500ms ease-out;
 }
 .search-btn:hover{
     background-color: aqua;
-    border: none;
+    
 border-radius: 5px;
 }
 
@@ -62,9 +64,11 @@ padding: 15px;
     justify-content: center;
     margin:0  auto 10px;
     cursor: pointer;
+    border: none;
+    transition: all 500ms ease-out;
 }
 .load-more:hover{
     background-color: aqua;
-        border: none;
+        
         border-radius: 5px;
 }
