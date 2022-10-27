@@ -26,8 +26,8 @@ searchButton.addEventListener('click',onClick)
     cleanImages()
     const trimmedValue = input.value.trim();
     if (trimmedValue !== '') {
-        createFetch(trimmedValue, pageNr,perPage).then(data => {
-            console.log(data);
+     const data = await createFetch(trimmedValue, pageNr,perPage) 
+            
             if (data.hits.length === 0) {
                 Notiflix.Notify.failure(
                     'Sorry, there are no images matching your search query. Please try again.'
@@ -43,18 +43,18 @@ searchButton.addEventListener('click',onClick)
                 loadMoreButton.style.display = 'block'
             }
             
-        })
+        }
         
     }
     
-}
+
 
 loadMoreButton.addEventListener('click',onLoadMoreClick)
-function onLoadMoreClick(evt) {
+async function onLoadMoreClick(evt) {
     evt.preventDefault;
     pageNr += 1
     const name = input.value;
-        createFetch(name, pageNr,perPage).then(data => {
+     const data= await  createFetch(name, pageNr,perPage)
             console.log(data);
             let totalPages= data.totalHits/perPage
             if (pageNr >= totalPages) {
@@ -68,9 +68,9 @@ function onLoadMoreClick(evt) {
                 loadMoreButton.style.display = 'block'
                 gallerySimpleLightbox.refresh()
             }
-        })
+        }
     
-}
+
 
             
             
